@@ -1,7 +1,3 @@
-/**
- * Created by Rodey on 2015/7/20.
- * 数据管理
- */
 
 // APPModel (Ajax)
 ;(function(){
@@ -56,7 +52,7 @@
 
         _inject(url){
             return function(){
-                this._ajax.apply(this, APPModel._merageArgs(url, arguments));
+                return this._ajax.apply(this, APPModel._merageArgs(url, arguments));
             }
         }
 
@@ -73,6 +69,14 @@
             if(!url){
                 throw new SyntaxError('not found ajax url');
             }
+            // .test(function(res){}, function(err){}, options);
+            if($.isFunction(data) && $.isFunction(su)){
+                su = data;
+                fail = su;
+                options = fail;
+                data = undefined;
+            }
+            // .test(function(res){}, options);
             if($.isFunction(data) && (!su || '[object Object]' === toString.call(su) )){
                 options = su;
                 su = data;
@@ -83,15 +87,15 @@
             }
             options = options || {};
             options.success = su;
-            options.fail = fail;
+            options.error = fail;
             options.data = data;
             options.url = url;
 
             this.ajaxSetting = $.extend(true, {}, defaultConfig, this.config, options);
             // 发送ajax请求前触发
             let beforeSend = this.ajaxSetting['beforeSend'];
-            let befor = beforeSend.apply(null);
-            if(befor === false) return false;
+            let before = beforeSend.apply(null);
+            if(before === false) return false;
 
             return $.ajax(this.ajaxSetting);
         }

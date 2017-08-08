@@ -12,6 +12,9 @@
         APPModel.test(res => {
             console.log(res);
         });
+        APPModel.test().done(res => {
+            console.log(res);
+        });
         APPModel.test.get().done(res => {
             console.log(res);
         });
