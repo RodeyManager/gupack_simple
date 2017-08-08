@@ -1,0 +1,63 @@
+.links{
+    margin: 50px auto;
+    position: relative;
+}
+.links a, a:hover, a:active, a:link{
+    color: #666;
+    text-decoration: none;
+    margin: 0 10px;
+}
+.links a:last-child:before{
+    padding-right: 5px;
+}
+.links a:nth-child(2){
+    position: relative;
+}
+.links a:before{
+    margin-right: 5px;
+}
+.links ul:before{
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    list-style: none;
+    border: 6px solid;
+    border-color: transparent transparent #CEE6E6 transparent;
+    position: absolute;
+    top: -11px;
+    left: 27px;
+}
+.links ul.case{
+    position: absolute;
+    left: 50%;
+    top: 26px;
+    -webkit-transform: translate(-26%, 0);
+    -moz-transform: translate(-26%, 0);
+    transform: translate(-26%, 0);
+    width: 200px;
+    padding: 10px;
+    text-align: left;
+    background-color: #CEE6E6;
+}
+.links ul.case li{
+    list-style: none;
+    text-align: left;
+}
+.links ul.case li a{
+    font-size: 12px;
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    transition: all 0.25s ease;
+}
+.links ul.case li a:hover{
+    color: #8DD6D5;
+}
+.fade-enter-active, .fade-leave-active {
+    -webkit-transition: opacity .25s;
+    -moz-transition: opacity .25s;
+    transition: opacity .25s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+    opacity: 0;
+}
