@@ -148,18 +148,9 @@ function jsLoaders(){
 
 function htmlLoaders(){
     return {
-        'gulp-tag-include': {
-            compress: env.isIf
-        },
+        'gulp-tag-include': { compress: env.isIf },
         // 版本号（缓存控制）
-        'gulp-recache': recache(env.dest.path),
-        'gulp-htmlmin': {
-             _if: env.isProduction,
-             collapseWhitespace: true,
-             minifyJS: true,
-             minifyCSS: true,
-             removeComments: true
-        }
+        'gulp-recache': recache(env.dest.path)
     }
 }
 
