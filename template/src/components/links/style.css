@@ -53,11 +53,3 @@
 .links ul.case li a:hover{
     color: #8DD6D5;
 }
-.fade-enter-active, .fade-leave-active {
-    -webkit-transition: opacity .25s;
-    -moz-transition: opacity .25s;
-    transition: opacity .25s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
-    opacity: 0;
-}

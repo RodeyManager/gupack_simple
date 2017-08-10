@@ -4,19 +4,19 @@
 ;(function(){
     'use strict';
 
-    $(function(){
-        var $links = $('.links'),
+    $(() => {
+        let $links = $('.links'),
             $case = $links.find('#case'),
             $box = $links.find('.case');
-        $case.click(function(){
+        $case.click(e => {
             if($box.css('display') !== 'block'){
                 $box.fadeIn();
             }else{
                 $box.fadeOut();
             }
         });
-        $('body').click(function(evt){
-            var target = evt.target;
+        $('body').click(evt => {
+            let target = evt.target;
             if(target.id !== 'case'){
                 $box.hide();
             }

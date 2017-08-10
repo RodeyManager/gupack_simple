@@ -1,7 +1,6 @@
 'use strict';
 
 const
-    path    = require('path'),
     util    = require('util'),
     env     = require('./config/app-env');
 
