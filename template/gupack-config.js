@@ -66,7 +66,8 @@ module.exports =  {
                 'components/**/*',
                 'templates/**/*',
                 'assets/**/*',
-                'services/**/*'
+                'services/**/*',
+                'modules/**/*'
             ]
         },
 

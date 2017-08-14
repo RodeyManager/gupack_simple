@@ -2,13 +2,20 @@
 
 const
     App = require('../../config/app-config'),
-    AppService = require('../../services/app.servvice').getInstance({}),
+    AppService = require('../../services/app.service').getInstance({}),
+    TestService = require('../../services/test.service'),
     links = require('../../components/links/script');
 
 $(function(){
     console.log($(document));
 
     links();
+
+    let testService = new TestService();
+
+    testService.getTestData().then(data => {
+        console.log('res.data: ', data);
+    });
 
     // APPModel.test 方法对应api的test
     // 参考config/app-api.js的App.webServiceUrls
