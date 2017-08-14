@@ -1,7 +1,7 @@
 'use strict';
 
 const
-    util    = require('util'),
+    babelify = require('babelify'),
     env     = require('./config/app-env');
 
 const
@@ -35,69 +35,53 @@ module.exports =  {
             watch: ['assets/css/**/*']
         },
 
-        'build.modules': {
-            src: 'modules/**/*',
+        'build.modules.views': {
+            src: 'modules/**/*View.js',
             // 过滤掉不进行编译的文件或目录
-            filters: [
-                'modules/model.js',
-                'modules/view.js',
-                'modules/main.js'
-            ],
+            filters: [],
             dest: 'modules',
-            loader: jsLoaders(),
-            watch: ['modules/**/*']
+            loader: {
+                'gulp-browserify-multi-entry': {
+                    debug: !env.isIf,
+                    external: ['jquery'],
+                    transform: [
+                        [babelify,  {
+                            presets: ['es2015', 'es2016', 'stage-2'],
+                            plugins: [ 'add-module-exports' ],
+                            compact: true
+                        }],
+                    ]
+                },
+                'gulp-jsminer': jsminer()
+            }
         },
 
         'build.views': {
             src: ['views/**/*.html'],
             dest: 'views',
-            rely: ['build.css', 'build.components.js', 'build.lib.js', 'build.app.js', 'build.modules'],
+            rely: ['build.css', 'build.lib.js', 'build.modules.views'],
             loader: htmlLoaders(),
             watch: [
                 'views/**/*',
                 'components/**/*',
                 'templates/**/*',
-                'assets/**/*'
+                'assets/**/*',
+                'services/**/*'
             ]
-        },
-
-        'build.components.js': {
-            src: 'components/**/*.js',
-            dest: 'assets/js',
-            loader: util._extend({
-                'gulp-concat': 'components.js'
-            }, jsLoaders())
         },
 
         'build.lib.js': {
             src: getLibs(),
             dest: 'assets/js',
-            loader: util._extend({
-                'gulp-concat': 'lib.js'
-            }, jsLoaders())
-        },
-
-        'build.app.js': {
-            src: [
-                env.configPath,
-                'config/app-api.js',
-                'modules/main.js',
-                'modules/model.js',
-                'modules/view.js',
-                'assets/js/app.js'
-            ],
-            dest: 'assets/js',
-            loader: util._extend({
-                'gulp-concat': 'app.js'
-            }, jsLoaders())
+            loader: {
+                'gulp-concat': 'lib.js',
+                'gulp-jsminer': jsminer()
+            }
         },
 
         'build.assets': {
             src: 'assets/{fonts,images,js}/**/*',
-            filters: [
-                'assets/js/app.js',
-                'assets/js/components.js',
-            ].concat(getLibs()),
+            filters: [].concat(getLibs()),
             dest: 'assets',
             loader: {
                 'gulp-jsminer': {
@@ -135,14 +119,11 @@ function cssLoaders(fileName){
     }
 }
 
-function jsLoaders(){
+function jsminer(){
     return {
-        'gulp-babel': gulpBabel(),
-        'gulp-jsminer': {
-            _if: env.isProduction,
-            preserveComments: '!'
-        }
-    }
+        _if: env.isProduction,
+        preserveComments: '!'
+    };
 }
 
 function htmlLoaders(){
@@ -172,13 +153,4 @@ function getLibs(){
         'assets/js/plugins/jquery.query.js',
         'assets/js/plugins/jquery.cookie.js'
     ];
-}
-
-function gulpBabel(){
-    return {
-        presets: [ 'es2015', 'es2015', 'es2017', 'stage-2' ],
-        plugins: [
-            'transform-remove-strict-mode'
-        ]
-    };
 }
