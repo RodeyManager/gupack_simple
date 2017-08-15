@@ -2,9 +2,9 @@
 
 const
     App = require('../../config/app-config'),
-    AppService = require('../../services/app.service').getInstance({}),
+    AppService = require('../../services/app.service'),
     TestService = require('../../services/test.service'),
-    links = require('../../components/links/script');
+    links = require('../../components/links/links');
 
 
     console.log(document.body);

@@ -1,7 +1,7 @@
 'use strict';
 
 const
-	AppService = require('./app.service').getInstance();
+	AppService = require('./app.service');
 
 export default class TestService{
 	constructor(){}

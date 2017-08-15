@@ -18,7 +18,7 @@ let defaultConfig = {
 
 let instance = null;
 
-export default class AppService{
+class AppService{
 
     constructor(config){
         this.config = config || {};
@@ -119,3 +119,5 @@ export default class AppService{
     }
 
 }
+
+export default AppService.getInstance();
