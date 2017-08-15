@@ -44,13 +44,7 @@ module.exports =  {
                 'gulp-browserify-multi-entry': {
                     debug: !env.isIf,
                     external: ['jquery'],
-                    transform: [
-                        [babelify,  {
-                            presets: ['es2015', 'es2016', 'stage-1'],
-                            plugins: [ 'add-module-exports' ],
-                            compact: true
-                        }],
-                    ]
+                    transform: [ babelify ]
                 },
                 'gulp-jsminer': jsminer()
             }

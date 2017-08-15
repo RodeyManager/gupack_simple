@@ -6,8 +6,8 @@ const
     TestService = require('../../services/test.service'),
     links = require('../../components/links/script');
 
-$(function(){
-    console.log($(document));
+
+    console.log(document.body);
 
     links();
 
@@ -38,5 +38,5 @@ $(function(){
         console.log(res);
     });
 
-});
+
 
