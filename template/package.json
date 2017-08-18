@@ -8,7 +8,8 @@
     "dev": "gupack build -e dev",
     "stg": "gupack build -e stg",
     "prd": "gupack build -e prd",
-    "server": "gupack build -s"
+    "server": "gupack build -s",
+    "test": "gupack test"
   },
   "devDependencies": {
     "babel-plugin-add-module-exports": "^0.2.1",
@@ -28,5 +29,6 @@
     "gulp-uglifycss": "^1.0.4"
   },
   "author": "Rodey.Luo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }
